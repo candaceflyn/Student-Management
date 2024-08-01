@@ -1,0 +1,225 @@
+<!--<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+<meta charset="ISO-8859-1">
+<title>Index</title>
+</head>
+<body>
+ 
+<h1>Student input</h1>
+<form action="addStudent" method="post">
+	
+<label for="studentid">Student Id :</label> <br/>
+<input type="text" name="sid"/> <br/>
+ 
+<label for="firstname">First name :</label> <br/>
+<input type="text" name="fName"/> <br/>
+ 
+<label for="lastname">Last name :</label> <br/>
+<input type="text" name="lName"/> <br/>
+ 
+<label for="email">Email :</label> <br/>
+<input type="email" name="email"/> <br/>
+ 
+<label for="age">Age :</label> <br/>
+<input type="number" name="age"/> <br/>
+ 
+<label for="course">Course :</label> <br/>
+<input type="text" name="course"/> <br/>
+ 
+<button type="submit">Submit</button>
+</form>
+<br/>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+<meta charset="UTF-8">
+<title>Student Management</title>
+</head>
+<body>
+<h2>Student List</h2>
+<table border="6">
+<thead>
+<tr>
+<th>ID</th>
+<th>First Name</th>
+<th>Last Name</th>
+<th>Email</th>
+<th>Age</th>
+<th>Course</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="student : ${students}">
+<td th:text="${student.id}"></td>
+<td th:text="${student.fName}"></td>
+<td th:text="${student.lName}"></td>
+<td th:text="${student.email}"></td>
+<td th:text="${student.age}"></td>
+<td th:text="${student.course}"></td>
+<td>
+<a th:href="@{'/edit/' + ${student.id}}">Edit</a>
+<a th:href="@{'/delete/' + ${student.id}}">Delete</a>
+</td>
+</tr>
+</tbody>
+</table>
+<h2>Add Student</h2>
+<form th:action="@{/students}" th:object="${newStudent}" method="post">
+<label for="fName">First Name:</label>
+<input type="text" id="fName" name="fName" th:field="*{fName}" required>
+<br>
+ 
+        <label for="lName">Last Name:</label>
+<input type="text" id="lName" name="lName" th:field="*{lName}" required>
+<br>
+ 
+        <label for="email">Email:</label>
+<input type="email" id="email" name="email" th:field="*{email}" required>
+<br>
+ 
+        <label for="age">Age:</label>
+<input type="number" id="age" name="age" th:field="*{age}" required>
+<br>
+ 
+        <label for="course">Course:</label>
+<input type="text" id="course" name="course" th:field="*{course}" required>
+<br>
+ 
+        <button type="submit">Add</button>
+</form>
+ 
+    <h2>Edit Student</h2>
+<form th:action="@{/update}" th:object="${editedStudent}" method="post">
+<input type="hidden" id="id" name="id" th:field="*{id}">
+<label for="fName">First Name:</label>
+<input type="text" id="fName" name="fName" th:field="*{fName}" required>
+<br>
+ 
+        <label for="lName">Last Name:</label>
+<input type="text" id="lName" name="lName" th:field="*{lName}" required>
+<br>
+ 
+        <label for="email">Email:</label>
+<input type="email" id="email" name="email" th:field="*{email}" required>
+<br>
+ 
+        <label for="age">Age:</label>
+<input type="number" id="age" name="age" th:field="*{age}" required>
+<br>
+ 
+        <label for="course">Course:</label>
+<input type="text" id="course" name="course" th:field="*{course}" required>
+<br>
+ 
+        <button type="submit">Update</button>
+</form>
+ 
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Student List</title>
+</head>
+<body>
+ 
+<h2>Student List</h2>
+ 
+<table border="1">
+<thead>
+<tr>
+<th>ID</th>
+<th>First Name</th>
+<th>Last Name</th>
+<th>Email</th>
+<th>Age</th>
+<th>Course</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="student : ${students}">
+<td th:text="${student.sid}"></td>
+<td th:text="${student.fName}"></td>
+<td th:text="${student.lName}"></td>
+<td th:text="${student.email}"></td>
+<td th:text="${student.age}"></td>
+<td th:text="${student.course}"></td>
+</tr>
+</tbody>
+</table>
+ 
+<h2>Add Student</h2>
+ 
+<form th:action="@{/addStudent}" method="post" th:object="${newStudent}">
+<label for="fName">First Name:</label>
+<input type="text" id="fName" name="fName" th:field="*{fName}" required>
+<br>
+ 
+    <label for="lName">Last Name:</label>
+<input type="text" id="lName" name="lName" th:field="*{lName}" required>
+<br>
+ 
+    <label for="email">Email:</label>
+<input type="email" id="email" name="email" th:field="*{email}" required>
+<br>
+ 
+    <label for="age">Age:</label>
+<input type="number" id="age" name="age" th:field="*{age}" required>
+<br>
+ 
+    <label for="course">Course:</label>
+<input type="text" id="course" name="course" th:field="*{course}" required>
+<br>
+ 
+    <button type="submit">Add Student</button>
+</form>
+
+<!-- Update Student form -->
+<h2>Update Student</h2>
+<form th:action="@{/updateStudent}" method="post" th:object="${updateStudent}">
+<!-- Input fields for updating student details -->
+<label for="updateStudentId">Student ID to Update:</label>
+<input type="number" id="updateStudentId" name="updateStudentId" th:field="*{sid}" required>
+<br>
+<label for="updateFName">New First Name:</label>
+<input type="text" id="updateFName" name="updateFName" th:field="*{fName}" required>
+<br>
+<label for="updateLName">New Last Name:</label>
+<input type="text" id="updateLName" name="updateLName" th:field="*{lName}" required>
+<br>
+<label for="updateEmail">New Email:</label>
+<input type="email" id="updateEmail" name="updateEmail" th:field="*{email}" required>
+<br>
+<label for="updateAge">New Age:</label>
+<input type="number" id="updateAge" name="updateAge" th:field="*{age}" required>
+<br>
+<label for="updateCourse">New Course:</label>
+<input type="text" id="updateCourse" name="updateCourse" th:field="*{course}" required>
+<br>
+<!-- Submit button for update student form -->
+<button type="submit">Update Student</button>
+<p th:if="${updateStudentError}" th:text="${updateStudentError}" style="color: red;"></p>
+
+</form>
+
+    <h2>Delete Student</h2>
+<form th:action="@{/deleteStudent}" method="post" th:object="${deleteStudent}">
+<label for="deleteStudentId">Student ID to Delete:</label>
+<input type="number" id="deleteStudentId" name="deleteStudentId" th:field="*{sid}" required>
+<br>
+<button type="submit">Delete Student</button>
+<p th:if="${deleteStudentError}" th:text="${deleteStudentError}" style="color: red;"></p>
+
+</form>
+
+
+</body>
+</html>
